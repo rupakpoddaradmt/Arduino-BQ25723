@@ -18,21 +18,29 @@
 // Common BQ25723 register addresses
 #define BQ25723_REG_CHARGE_OPTION_0    0x00
 #define BQ25723_REG_CHARGE_CURRENT     0x02
-#define BQ25723_REG_MAX_CHARGE_VOLTAGE 0x04
-#define BQ25723_REG_CHARGE_OPTION_1    0x30
-#define BQ25723_REG_CHARGE_OPTION_2    0x31
-#define BQ25723_REG_CHARGE_OPTION_3    0x32
-#define BQ25723_REG_PROCHOT_OPTION_0   0x33
-#define BQ25723_REG_PROCHOT_OPTION_1   0x34
-#define BQ25723_REG_ADC_OPTION         0x35
+#define BQ25723_REG_CHARGE_VOLTAGE     0x04
+#define BQ25723_REG_OTG_VOLTAGE        0x06
+#define BQ25723_REG_OTG_CURRENT        0x08
+#define BQ25723_REG_INPUT_VOLTAGE      0x0A
+#define BQ25723_REG_VSYS_MIN           0x0C
+#define BQ25723_REG_IIN_HOST           0x0E
 #define BQ25723_REG_CHARGER_STATUS     0x20
-#define BQ25723_REG_PROCHOT_STATUS     0x21
-#define BQ25723_REG_SYSTEM_VOLTAGE     0x3C
-#define BQ25723_REG_VBAT               0x3D
-#define BQ25723_REG_CHARGE_CURRENT_REG 0x3E
-#define BQ25723_REG_INPUT_CURRENT      0x3F
-#define BQ25723_REG_MANUFACTURER_ID    0xFE
-#define BQ25723_REG_DEVICE_ID          0xFF
+#define BQ25723_REG_PROCHOT_STATUS     0x22
+#define BQ25723_REG_IIN_DPM            0x24
+#define BQ25723_REG_ADCVBUS_PSYS       0x26
+#define BQ25723_REG_ADCIBAT            0x28
+#define BQ25723_REG_ADCIINCMPIN        0x2A
+#define BQ25723_REG_ADCVSYSVBAT        0x2C
+#define BQ25723_REG_MANUFACTURER_ID    0x2E
+#define BQ25723_REG_DEVICE_ID          0x2F
+#define BQ25723_REG_CHARGE_OPTION_1    0x30
+#define BQ25723_REG_CHARGE_OPTION_2    0x32
+#define BQ25723_REG_CHARGE_OPTION_3    0x34
+#define BQ25723_REG_PROCHOT_OPTION_0   0x36
+#define BQ25723_REG_PROCHOT_OPTION_1   0x38
+#define BQ25723_REG_ADC_OPTION         0x3A
+#define BQ25723_REG_CHARGE_OPTION_4    0x3C
+#define BQ25723_REG_VMIN_ACT_PROT      0x3E
 
 class BQ25723 {
 private:
@@ -206,21 +214,29 @@ public:
         switch(regAddr) {
             case BQ25723_REG_CHARGE_OPTION_0:    return "CHARGE_OPTION_0";
             case BQ25723_REG_CHARGE_CURRENT:     return "CHARGE_CURRENT";
-            case BQ25723_REG_MAX_CHARGE_VOLTAGE: return "MAX_CHARGE_VOLTAGE";
+            case BQ25723_REG_CHARGE_VOLTAGE:     return "CHARGE_VOLTAGE";
+            case BQ25723_REG_OTG_VOLTAGE:        return "OTG_VOLTAGE";
+            case BQ25723_REG_OTG_CURRENT:        return "OTG_CURRENT";
+            case BQ25723_REG_INPUT_VOLTAGE:      return "INPUT_VOLTAGE";
+            case BQ25723_REG_VSYS_MIN:           return "VSYS_MIN";
+            case BQ25723_REG_IIN_HOST:           return "IIN_HOST";
+            case BQ25723_REG_CHARGER_STATUS:     return "CHARGER_STATUS";
+            case BQ25723_REG_PROCHOT_STATUS:     return "PROCHOT_STATUS";
+            case BQ25723_REG_IIN_DPM:            return "IIN_DPM";
+            case BQ25723_REG_ADCVBUS_PSYS:       return "ADCVBUS_PSYS";
+            case BQ25723_REG_ADCIBAT:            return "ADCIBAT";
+            case BQ25723_REG_ADCIINCMPIN:        return "ADCIINCMPIN";
+            case BQ25723_REG_ADCVSYSVBAT:        return "ADCVSYSVBAT";
+            case BQ25723_REG_MANUFACTURER_ID:    return "MANUFACTURER_ID";
+            case BQ25723_REG_DEVICE_ID:          return "DEVICE_ID";
             case BQ25723_REG_CHARGE_OPTION_1:    return "CHARGE_OPTION_1";
             case BQ25723_REG_CHARGE_OPTION_2:    return "CHARGE_OPTION_2";
             case BQ25723_REG_CHARGE_OPTION_3:    return "CHARGE_OPTION_3";
             case BQ25723_REG_PROCHOT_OPTION_0:   return "PROCHOT_OPTION_0";
             case BQ25723_REG_PROCHOT_OPTION_1:   return "PROCHOT_OPTION_1";
             case BQ25723_REG_ADC_OPTION:         return "ADC_OPTION";
-            case BQ25723_REG_CHARGER_STATUS:     return "CHARGER_STATUS";
-            case BQ25723_REG_PROCHOT_STATUS:     return "PROCHOT_STATUS";
-            case BQ25723_REG_SYSTEM_VOLTAGE:     return "SYSTEM_VOLTAGE";
-            case BQ25723_REG_VBAT:               return "VBAT";
-            case BQ25723_REG_CHARGE_CURRENT_REG: return "CHARGE_CURRENT_REG";
-            case BQ25723_REG_INPUT_CURRENT:      return "INPUT_CURRENT";
-            case BQ25723_REG_MANUFACTURER_ID:    return "MANUFACTURER_ID";
-            case BQ25723_REG_DEVICE_ID:          return "DEVICE_ID";
+            case BQ25723_REG_CHARGE_OPTION_4:    return "CHARGE_OPTION_4";
+            case BQ25723_REG_VMIN_ACT_PROT:      return "VMIN_ACT_PROT";
             default:                             return "UNKNOWN";
         }
     }

@@ -42,15 +42,45 @@ void setup() {
 
     // Try initializing the charger
     if (charger.begin(SDA_PIN, SCL_PIN)) {
-        Serial.println("BQ25723 detected and initialized!");
+        Serial.println("\nDumping BQ25723 Registers:");
+        uint8_t knownRegisters[] = {
+            BQ25723_REG_CHARGE_OPTION_0,
+            BQ25723_REG_CHARGE_CURRENT,
+            BQ25723_REG_CHARGE_VOLTAGE,
+            BQ25723_REG_OTG_VOLTAGE,
+            BQ25723_REG_OTG_CURRENT,
+            BQ25723_REG_INPUT_VOLTAGE,
+            BQ25723_REG_VSYS_MIN,
+            BQ25723_REG_IIN_HOST,
+            BQ25723_REG_CHARGER_STATUS,
+            BQ25723_REG_PROCHOT_STATUS,
+            BQ25723_REG_IIN_DPM,
+            BQ25723_REG_ADCVBUS_PSYS,
+            BQ25723_REG_ADCIBAT,
+            BQ25723_REG_ADCIINCMPIN,
+            BQ25723_REG_ADCVSYSVBAT,
+            BQ25723_REG_MANUFACTURER_ID,
+            BQ25723_REG_DEVICE_ID,
+            BQ25723_REG_CHARGE_OPTION_1,
+            BQ25723_REG_CHARGE_OPTION_2,
+            BQ25723_REG_CHARGE_OPTION_3,
+            BQ25723_REG_PROCHOT_OPTION_0,
+            BQ25723_REG_PROCHOT_OPTION_1,
+            BQ25723_REG_ADC_OPTION,
+            BQ25723_REG_CHARGE_OPTION_4,
+            BQ25723_REG_VMIN_ACT_PROT
+        };
 
-        // Read the DEVICE_ID register (should return a fixed ID, e.g., 0x23 for BQ25723)
-        uint16_t deviceId = charger.readRegister(BQ25723_REG_DEVICE_ID);
-        if (deviceId != 0xFFFF) {
-            Serial.print("DEVICE_ID (0xFF): 0x");
-            Serial.println(deviceId, HEX);
-        } else {
-            Serial.println("Failed to read DEVICE_ID register.");
+        for (uint8_t i = 0; i < sizeof(knownRegisters); i++) {
+            uint8_t reg = knownRegisters[i];
+            uint16_t value = charger.readRegister(reg);
+            Serial.print("0x");
+            if (reg < 0x10) Serial.print("0");
+            Serial.print(reg, HEX);
+            Serial.print(" (");
+            Serial.print(BQ25723::getRegisterName(reg));
+            Serial.print("): 0x");
+            Serial.println(value, HEX);
         }
     } else {
         Serial.println("BQ25723 not found at expected I2C address (0x6B or 0x6A).");
